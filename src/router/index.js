@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import Index from "@/pages/index.vue";
 import NotFound from "@/pages/404.vue";
 import Login from "@/pages/login.vue";
+import Register from "@/pages/register.vue";
 import CoList from "@/pages/co/list.vue";
 import UserList from "@/pages/system/userList.vue";
 import RoleList from "@/pages/system/roleList.vue";
@@ -42,6 +43,11 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register,
   },
 ];
 

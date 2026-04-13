@@ -30,7 +30,6 @@ const store = createStore({
     login({ commit }, { username, password }) {
       return new Promise((resolve, reject) => {
         localStorage.removeItem("authorization");
-        localStorage.removeItem("hamster");
         localStorage.removeItem("tabList");
         commit("SET_USERINFO", {});
         commit("SET_AUTHORITY", []);
@@ -40,8 +39,6 @@ const store = createStore({
             if (res.data.code === 200) {
               // 存储token
               localStorage.setItem("authorization", res.headers.authorization);
-              // 存储后端额外鉴权头（你抓到的 hamster）
-              localStorage.setItem("hamster", res.headers.hamster);
             }
             resolve(res.data);
           })
@@ -64,7 +61,6 @@ const store = createStore({
     // 退出登录,删除信息
     logout({ commit }) {
       localStorage.removeItem("authorization");
-      localStorage.removeItem("hamster");
       localStorage.removeItem("tabList");
       commit("SET_USERINFO", {});
       commit("SET_AUTHORITY", []);

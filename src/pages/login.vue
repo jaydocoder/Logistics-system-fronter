@@ -37,6 +37,10 @@
             录</el-button>
         </el-form-item>
       </el-form>
+
+      <div class="switch-auth"></div>
+        还没有账号？
+        <el-link type="primary" :underline="false" @click="router.push('/register')">去注册</el-link>
     </el-col>
   </el-row>
 </template>
@@ -96,7 +100,7 @@ const onSubmit = () => {
       })
       .catch((err) => {
         // 提示信息
-        customNotification("error", res.data.msg);
+        customNotification("error", err?.response?.data?.msg || "登录失败");
       })
       .finally(() => {
         // 加载动画结束
@@ -147,5 +151,9 @@ onBeforeUnmount(() => {
 
 .right .info-line {
   @apply h-[3px] w-16 bg-gray-200;
+}
+
+.switch-auth {
+  @apply text-gray-500 text-sm;
 }
 </style>

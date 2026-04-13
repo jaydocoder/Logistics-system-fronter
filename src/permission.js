@@ -8,12 +8,13 @@ router.beforeEach(async (to, from, next) => {
   // 显示页面加载图标
   showFullLoading();
 
+  const whiteList = ["/login", "/register"];
   const authorization = localStorage.getItem("authorization");
-  if (!authorization && to.path != "/login") {
+  if (!authorization && !whiteList.includes(to.path)) {
     customNotification("warning", "请登录后访问");
     next({ path: "/login" });
   }
-  if (authorization && to.path == "/login") {
+  if (authorization && whiteList.includes(to.path)) {
     customNotification("warning", "已登录,无需重复操作");
     next({ path: from.path ? from.path : "/" });
   }
@@ -30,7 +31,7 @@ router.beforeEach(async (to, from, next) => {
   }
 
   // 设置页面标题
-  let title = (to.meta.title ? to.meta.title + "-" : "") + "仓鼠物流管理系统";
+  let title = (to.meta.title ? to.meta.title + "-" : "") + "物流运输管理系统";
   document.title = title;
 
   next();

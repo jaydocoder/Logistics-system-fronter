@@ -11,7 +11,6 @@ service.interceptors.request.use(
   function (config) {
     // 请求头添加token
     const authorization = localStorage.getItem("authorization");
-    const hamster = localStorage.getItem("hamster");
 
     // token赋值
     if (authorization) {
@@ -19,12 +18,6 @@ service.interceptors.request.use(
       config.headers["authorization"] = authorization;
     }
 
-    // 后端额外鉴权头：hamster
-    if (hamster) {
-      config.headers = config.headers || {};
-      config.headers["hamster"] = hamster;
-    }
-    // 在发送请求之前做些什么
     return config;
   },
   function (err) {
@@ -41,12 +34,8 @@ service.interceptors.response.use(
     const headers = response?.headers;
     const authorization =
       (headers?.get && headers.get("authorization")) || headers?.authorization;
-    const hamster = (headers?.get && headers.get("hamster")) || headers?.hamster;
     if (authorization) {
       localStorage.setItem("authorization", authorization);
-    }
-    if (hamster) {
-      localStorage.setItem("hamster", hamster);
     }
     return response;
   },

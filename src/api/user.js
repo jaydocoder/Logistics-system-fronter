@@ -7,6 +7,10 @@ export function login(username, password) {
   return axios.post("/login", data);
 }
 
+export function register(userData) {
+  return axios.post("/user/register", userData);
+}
+
 export function logout() {
   return axios.post("/logout");
 }
